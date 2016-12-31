@@ -1,0 +1,8 @@
+#
+# INSTALL: pip install --target=./extlibs -r requirements.txt
+#
+bottle==0.12.9
+requests==2.10.0
+ordereddict==1.1
+simplejson==3.8.1
+daemonize==2.4.6
