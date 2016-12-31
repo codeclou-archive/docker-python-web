@@ -24,7 +24,7 @@ docker create \
 #
 # Start
 #
-docker start pyload
+docker start myapp
 
 #
 # OR: Run interactively
@@ -51,7 +51,7 @@ See the [example-app](./example-app) and abide the following **conventions**:
    * (2) Run the app `python app.py` (in foreground as last command)
  * Include the following line in your app to fetch the libs from `extlibs` dir
    * `sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/extlibs/")`
- * Start your server on Port 8000
+ * Start your server on Port 8000 and have it listen on `0.0.0.0`
 
 -----
 
