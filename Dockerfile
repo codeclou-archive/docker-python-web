@@ -1,26 +1,37 @@
-FROM ubuntu:16.04
+FROM alpine:3.5
 
 #
 # BASE PACKAGES
 #
-RUN apt-get update && apt-get install -y sudo software-properties-common python-software-properties && rm -rf /var/lib/apt/lists/* && \
-    sudo apt-get update && \
-    sudo apt-get -y install apt-utils wget curl bzip2 build-essential zlib1g-dev git vim && \
-    sudo apt-get -y install zip unzip python python-pip python-crypto python-pycurl
+RUN apk add --no-cache bash && \
+    apk add --no-cache python && \
+    apk add --no-cache py2-pip && \
+    apk add --no-cache py2-crypto && \
+    apk add --no-cache py2-curl && \
+    pip install --upgrade pip && \
+    mkdir /pyapp/
 
 #
-# PIP
+# PREPARE USER MODE
 #
-RUN pip install --upgrade pip
+COPY run.sh /pyapp/run.sh
+RUN touch /pyapp/run.sh && \
+    adduser -S pyworker && \
+    chown root:root /pyapp/run.sh && \
+    chmod u+rwx,g+rwx,o-w,o+rx /pyapp/run.sh && \
+    chmod o+rx /pyapp && \
+    mkdir -p /pyapp/web  && chown -R pyworker:root /pyapp/web  && \
+    mkdir -p /pyapp/data && chown -R pyworker:root /pyapp/data
 
 #
-# WORKDIR, EXPOSE, a.s.o
+# VOLUMES AND EXPOSE
 #
-WORKDIR /opt/python/web/
-ENV PATH /opt/python/web:$PATH
+VOLUME ["/pyapp/web"]
+VOLUME ["/pyapp/data"]
 EXPOSE 8000
 
 #
-# RUN
+# RUN IN USER MODE
 #
-CMD ["bash", "/opt/python/web/run.sh"]
+USER pyworker
+CMD ["/pyapp/run.sh"]

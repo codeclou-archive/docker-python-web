@@ -10,6 +10,8 @@ from bottle import route, run
 
 @route('/')
 def hello():
+    f = open('/pyapp/data/testfile', 'w+')
+    f.write('0123456789abcdef')
     return "Hello World!"
 
 run(host='0.0.0.0', port=8000, debug=True)

@@ -9,31 +9,33 @@ Docker Container that starts a python webapp mounted as volume.
 
 ### Usage
 
-Start a docker image with the command.
+**Interactive**
 
 ```bash
-#
-# CREATE NAMED CONTAINER
-#
-docker create \
-    --name myapp \
-    -v $(pwd)/example-app/:/opt/python/web \
-    -p 8877:8000 \
-    codeclou/docker-python-web:latest
-    
-#
-# Start
-#
-docker start myapp
-
-#
-# OR: Run interactively
-#
 docker run \
     -i -t \
-    -v $(pwd)/example-app/:/opt/python/web \
+    -v $(pwd)/example-app/:/pyapp/web \
+    -v $(pwd)/data/:/pyapp/data \
     -p 8866:8000 \
     codeclou/docker-python-web:latest
+```
+
+You can write to `/pyapp/data/*` from your application.
+
+----
+
+**Named Docker Container**
+
+
+```bash
+docker create \
+    --name myapp \
+    -v $(pwd)/example-app/:/pyapp/web \
+    -v $(pwd)/data/:/pyapp/data \
+    -p 8877:8000 \
+    codeclou/docker-python-web:latest
+
+docker start myapp
 ```
 
 Now go to http://localhost:8877 and see your app. 
@@ -46,12 +48,9 @@ Now go to http://localhost:8877 and see your app.
 See the [example-app](./example-app) and abide the following **conventions**:
 
  * Have a `requirements.txt` in the root of your project defining your dependencies
- * Have a `run.sh` in the root of your project that does two things
-   * (1) Run `pip install --target=./extlibs -r requirements.txt`
-   * (2) Run the app `python app.py` (in foreground as last command)
+ * Have a `app.py` in the root of your project that starts a server on 8000 and listens on `0.0.0.0` 
  * Include the following line in your app to fetch the libs from `extlibs` dir
    * `sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/extlibs/")`
- * Start your server on Port 8000 and have it listen on `0.0.0.0`
 
 -----
 

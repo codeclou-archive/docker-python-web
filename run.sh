@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /opt/python/web/
+cd /pyapp/web/
 
 #
 # INSTALL DEPS
