@@ -16,9 +16,11 @@ Docker Container that starts a python webapp mounted as volume.
 On the host system you should add a user and group with the following UID and GID values to have them
 mapped correctly on volume file permissions.
 
-    * User pyworker with UID 10777 
-    * Group pyworker with GID 10777
-    * Create the empty volume-dirs and assign them with `chown` to pyworker 
+ * User pyworker with UID 10777 
+ * Group pyworker with GID 10777
+ * Create the empty volume-dirs and assign them with `chown` to pyworker 
+
+----
 
 **Interactive**
 
@@ -27,7 +29,7 @@ docker run \
     -i -t \
     -v $(pwd)/example-app/:/pyapp/web \
     -v $(pwd)/data/:/pyapp/data \
-    -p 8866:8000 \
+    -p 8877:8000 \
     codeclou/docker-python-web:latest
 ```
 
