@@ -1,6 +1,6 @@
 # docker-python-web
 
-![](https://codeclou.github.io/doc/docker-19.svg)
+[![](https://codeclou.github.io/doc/docker-19.svg)](https://hub.docker.com/r/codeclou/docker-python-web/tags/) [![](https://codeclou.github.io/doc/docker-from-alpine.svg)](https://alpinelinux.org/)
 
 Docker Container that starts a python webapp mounted as volume.
 
