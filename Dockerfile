@@ -16,7 +16,8 @@ RUN apk add --no-cache bash && \
 #
 COPY run.sh /pyapp/run.sh
 RUN touch /pyapp/run.sh && \
-    adduser -S pyworker && \
+    addgroup -g 10777 pyworker && \
+    adduser -D -G pyworker -u 10777 pyworker && \
     chown root:root /pyapp/run.sh && \
     chmod u+rwx,g+rwx,o-w,o+rx /pyapp/run.sh && \
     chmod o+rx /pyapp && \

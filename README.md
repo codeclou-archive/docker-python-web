@@ -11,6 +11,15 @@ Docker Container that starts a python webapp mounted as volume.
 
 ### Usage
 
+**Users and Permissions**
+
+On the host system you should add a user and group with the following UID and GID values to have them
+mapped correctly on volume file permissions.
+
+    * User pyworker with UID 10777 
+    * Group pyworker with GID 10777
+    * Create the empty volume-dirs and assign them with `chown` to pyworker 
+
 **Interactive**
 
 ```bash
