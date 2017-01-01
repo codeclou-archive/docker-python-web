@@ -1,5 +1,7 @@
 # docker-python-web
 
+![](https://codeclou.github.io/doc/docker-19.svg)
+
 Docker Container that starts a python webapp mounted as volume.
 
 
