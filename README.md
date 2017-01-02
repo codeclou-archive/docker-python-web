@@ -11,6 +11,8 @@ Docker Container that starts a python webapp mounted as volume.
 
 ### Usage
 
+You can write to `/pyapp/data/*` from your application.
+
 **Users and Permissions**
 
 On the host system you should add a user and group with the following UID and GID values to have them
@@ -34,6 +36,19 @@ docker run \
 ```
 
 You can write to `/pyapp/data/*` from your application.
+
+----
+
+**Interactive Execute Python Commandline**
+
+```bash
+docker run \
+    -i -t \
+    -v $(pwd)/example-cli/:/pyapp/web \
+    -v $(pwd)/data/:/pyapp/data \
+    codeclou/docker-python-web:latest \
+    python cli.py
+```
 
 ----
 

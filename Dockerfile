@@ -3,11 +3,12 @@ FROM alpine:3.5
 #
 # BASE PACKAGES
 #
-RUN apk add --no-cache bash && \
-    apk add --no-cache python && \
-    apk add --no-cache py2-pip && \
-    apk add --no-cache py2-crypto && \
-    apk add --no-cache py2-curl && \
+RUN apk add --no-cache \
+            python \
+            py2-pip \
+            py2-crypto \
+            py2-curl \
+            py2-jinja2 && \
     pip install --upgrade pip && \
     mkdir /pyapp/
 
@@ -27,6 +28,7 @@ RUN touch /pyapp/run.sh && \
 #
 # VOLUMES AND EXPOSE
 #
+WORKDIR "/pyapp/web"
 VOLUME ["/pyapp/web"]
 VOLUME ["/pyapp/data"]
 EXPOSE 8000
