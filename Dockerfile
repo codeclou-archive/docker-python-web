@@ -4,6 +4,7 @@ FROM alpine:3.5
 # BASE PACKAGES
 #
 RUN apk add --no-cache \
+            bash \
             python \
             py2-pip \
             py2-crypto \
